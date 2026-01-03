@@ -1,14 +1,27 @@
 pipeline{
     agent any
-    environment{
-        MY_ENV="${BRANCH_NAME}"
-    }
     stages{
         stage("branch name"){
             steps{
                 echo "Branch is ${env.GIT_BRANCH}"
-                echo "Branch is ${MY_ENV}"
             }
         }
+        stage("deploy-main"){
+            when{
+                expression {env.GIT_BRANCH == 'origin/main'}
+            }
+            steps{
+                sh "echo deploying to main"
+            }
+        }
+        stage("deploy-test"){
+            when{
+                expression {env.GIT_BRANCH == 'origin/test'}
+            }
+            steps{
+                sh "echo deploying to test"
+            }
+        }
+                
     }
 }
