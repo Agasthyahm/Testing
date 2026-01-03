@@ -3,7 +3,7 @@ pipeline{
     stages{
         stage('Checkout') {
             steps {
-                git branch:"main", url:"https://github.com/Agasthyahm/Testing.git"
+                checkout scm
             }
         }
         stage("branch name"){
